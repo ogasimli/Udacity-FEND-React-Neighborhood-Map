@@ -26,3 +26,32 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* 404 Not Found page */
+
+.error-container {
+  height: 100vh;
+  margin: -40px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Righteous', cursive;
+}
+
+.error-image {
+  margin: 30px 0 30px;
+}
+
+.error-heading {
+  margin: 0;
+}
+
+.error-message {
+  margin: 6px 0 0 0;
+  color: #999;
+}
+
+.back-to-home {
+  margin: 45px 0 0;
+}
