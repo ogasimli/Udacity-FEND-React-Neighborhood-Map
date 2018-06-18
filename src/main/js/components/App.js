@@ -9,7 +9,11 @@ class App extends Component {
     return (
       <div className="app">
         <Switch>
-          <Route exact path="/" component={MapContainer} />
+          <Route
+            exact
+            path="/"
+            render={() => <MapContainer google={this.props.google} />}
+          />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </div>
