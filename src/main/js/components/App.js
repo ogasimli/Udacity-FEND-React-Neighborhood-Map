@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import MapContainer from './MapContainer';
 import PageNotFound from './PageNotFound';
+import withRoot from '../../../withRoot';
 import '../../res/styles/App.css';
 
 class App extends Component {
@@ -21,4 +22,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRoot(App);
