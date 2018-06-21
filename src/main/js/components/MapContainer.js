@@ -1,84 +1,76 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import * as Utils from '../utils/Utils';
 import PropTypes from 'prop-types';
 
 class MapContainer extends Component {
   static propTypes = {
-    google: PropTypes.object.isRequired
+    google: PropTypes.object.isRequired,
+    places: PropTypes.array.isRequired
   };
 
   state = {
     showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-    places: [
-      {
-        name: 'New York County Supreme Court',
-        position: { lat: 40.7143033, lng: -74.0036919 }
-      },
-      {
-        name: 'Queens County Supreme Court',
-        position: { lat: 40.7046946, lng: -73.8091145 }
-      },
-      {
-        name: 'Kings County Supreme Court',
-        position: { lat: 40.6940226, lng: -73.9890967 }
-      },
-      {
-        name: 'Richmond County Supreme Court',
-        position: { lat: 40.6412336, lng: -74.0768597 }
-      },
-      {
-        name: 'Bronx Supreme Court',
-        position: { lat: 40.8262388, lng: -73.9235238 }
-      }
-    ]
+    activeMarker: null,
+    selectedPlace: {}
   };
 
   componentDidMount() {}
 
-  onMarkerClick = (props, marker) =>
+  onMarkerClick = (props, marker) => {
+    console.log(this.state.activeMarker);
+    if (this.state.activeMarker) {
+      this.state.activeMarker.setAnimation(null);
+    }
     this.setState({
       selectedPlace: {
-        name: props.title,
+        title: props.title,
         position: props.position
       },
       activeMarker: marker,
       showingInfoWindow: true
     });
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+    }
+  };
 
-  onInfoWindowClose = () =>
+  onInfoWindowClose = () => {
+    this.state.activeMarker.setAnimation(null);
     this.setState({
       selectedPlace: {},
-      activeMarker: {},
+      activeMarker: null,
       showingInfoWindow: false
     });
+  };
 
   render() {
-    const { google } = this.props;
+    const { google, places } = this.props;
     const bounds = new google.maps.LatLngBounds();
-    this.state.places.forEach(place => bounds.extend(place.position));
+    places.forEach(place => bounds.extend(place.latlng));
 
     return (
       <Map
-        id="map"
         role="application"
         tabIndex="-1"
         google={google}
         initialCenter={{
-          lat: 40.6940226,
-          lng: -73.9890967
+          lat: 40.429839,
+          lng: 49.831505
         }}
-        zoom={11}
+        zoom={12}
         bounds={bounds}
       >
-        {this.state.places.map((place, index) => (
+        {places.map((place, index) => (
           <Marker
             key={index}
             onClick={this.onMarkerClick}
-            title={place.name}
-            position={place.position}
+            title={place.title}
+            position={place.latlng}
+            icon={Utils.getMarkerIcon(place)}
+            animation={google.maps.Animation.DROP}
           />
         ))}
 
@@ -88,7 +80,7 @@ class MapContainer extends Component {
           visible={this.state.showingInfoWindow}
         >
           <div>
-            <h1>{this.state.selectedPlace.name}</h1>
+            <h1>{this.state.selectedPlace.title}</h1>
           </div>
         </InfoWindow>
       </Map>
