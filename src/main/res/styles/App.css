@@ -1,7 +1,13 @@
-/* Map styling */
+/* App Title */
+#app-title {
+  width: 100%;
+  text-align: center;
+}
 
-#map {
-  height: 100vh;
+/* Map styling */
+.map-container {
+  position: relative;
+  width: 100vw;
 }
 
 /* 404 Not Found page */
