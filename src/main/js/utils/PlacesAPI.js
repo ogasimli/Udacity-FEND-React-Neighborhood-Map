@@ -16,6 +16,4 @@ const PLACES_URL = () => {
 export const getAll = () =>
   fetch(PLACES_URL())
     .then(res => res.json())
-    .then(places => {
-      console.log('places:', places);
-    });
+    .then(data => data.places);
