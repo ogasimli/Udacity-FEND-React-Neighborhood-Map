@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StadiumIcon(props) {
+function StadiumIcon() {
   return (
     <svg
       className="stadium"

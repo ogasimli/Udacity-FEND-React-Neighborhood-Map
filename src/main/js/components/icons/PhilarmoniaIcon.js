@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PhilarmoniaIcon(props) {
+function PhilarmoniaIcon() {
   return (
     <svg
       className="philarmonia"

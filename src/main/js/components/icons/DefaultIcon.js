@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DefaultIcon(props) {
+function DefaultIcon() {
   return (
     <svg
       className="default"
