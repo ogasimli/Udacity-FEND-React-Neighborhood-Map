@@ -28,7 +28,8 @@ const styles = theme => ({
 class PlacesList extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    places: PropTypes.array.isRequired
+    places: PropTypes.array.isRequired,
+    placeClick: PropTypes.func.isRequired
   };
 
   state = {
@@ -40,10 +41,8 @@ class PlacesList extends React.Component {
   };
 
   handleClick = event => {
-    // Get target element before bubbling
-    const target = event.currentTarget;
-    // Get classList of the target
-    const classList = target.classList;
+    // Get classList of the event target
+    const classList = event.currentTarget.classList;
     // Get last class of the target
     const categoryId = classList[classList.length - 1];
     // Determine the key of the state object's field
@@ -125,7 +124,7 @@ class PlacesList extends React.Component {
   };
 
   render() {
-    const { classes, places } = this.props;
+    const { classes, places, placeClick } = this.props;
 
     return (
       <div className={classes.root}>
@@ -154,7 +153,12 @@ class PlacesList extends React.Component {
                   unmountOnExit
                 >
                   <List component="div" disablePadding>
-                    <ListItem button className={classes.nested}>
+                    <ListItem
+                      button
+                      className={classes.nested}
+                      className={place.id}
+                      onClick={placeClick}
+                    >
                       <ListItemText
                         primary={place.title}
                         secondary={place.address}

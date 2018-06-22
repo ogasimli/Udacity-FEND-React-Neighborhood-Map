@@ -34,3 +34,153 @@ export const categories = [
   }
 ];
 
+/**
+ * Google Maps API key
+ */
+const GOOGLE_API_KEY = 'AIzaSyClMXgQ7Uzz-YA_dcFr8wGaDZ-2E9mQ8wA';
+
+/**
+ * Returns URL for loading Google Maps
+ *
+ * @param {string} apiKey - Google Maps API key
+ * @returns {string} - URL for loading Google Maps
+ */
+export const MAPS_URL = (apiKey = GOOGLE_API_KEY) =>
+  `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3&callback=initMap`;
+
+/**
+ * Default center coordinates for Google Maps
+ */
+export const MAPS_DEFAULT_CENTER = {
+  lat: 40.429839,
+  lng: 49.831505
+};
+
+/**
+ * Default zoom value of Google Maps
+ */
+export const MAPS_DEFAULT_ZOOM = 12;
+
+export const MAPS_CUSTOM_STYLE = [
+  {
+    featureType: 'administrative.land_parcel',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape.natural',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#e0efef'
+      },
+      {
+        visibility: 'on'
+      }
+    ]
+  },
+  {
+    featureType: 'poi',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#c0e8e8'
+      },
+      {
+        hue: '#1900ff'
+      },
+      {
+        visibility: 'on'
+      }
+    ]
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
+      {
+        lightness: 100
+      },
+      {
+        visibility: 'simplified'
+      }
+    ]
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'road.local',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'road.local',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'geometry',
+    stylers: [
+      {
+        lightness: 700
+      },
+      {
+        visibility: 'on'
+      }
+    ]
+  },
+  {
+    featureType: 'water',
+    stylers: [
+      {
+        color: '#7dcdcd'
+      }
+    ]
+  }
+];

@@ -55,7 +55,8 @@ class MainContainer extends React.Component {
 
   state = {
     mobileOpen: false,
-    places: []
+    places: [],
+    selectedPlaceId: ''
   };
 
   componentDidMount() {
@@ -70,6 +71,20 @@ class MainContainer extends React.Component {
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
+
+  /**
+   * Seve selected place id into current state
+   *
+   * @param {event} - Event object received as the result of click
+   */
+  placeClick = event => {
+    // Get classList of the event target
+    const classList = event.currentTarget.classList;
+    // Get last class of the target
+    const selectedPlaceId = classList[classList.length - 1];
+    // Set the value of selectedPlaceId
+    this.setState({ selectedPlaceId });
   };
 
   render() {
@@ -107,7 +122,7 @@ class MainContainer extends React.Component {
                 keepMounted: true // Better open performance on mobile.
               }}
             >
-              <PlacesList places={places} />
+              <PlacesList places={places} placeClick={this.placeClick} />
             </Drawer>
           </Hidden>
           <Hidden smDown implementation="css">
@@ -118,13 +133,13 @@ class MainContainer extends React.Component {
                 paper: classes.drawerPaper
               }}
             >
-              <PlacesList places={places} />
+              <PlacesList places={places} placeClick={this.placeClick} />
             </Drawer>
           </Hidden>
           <div className="map-container">
             <MapContainer
-              google={this.props.google}
               places={places}
+              selectedPlaceId={this.state.selectedPlaceId}
             />
           </div>
         </main>

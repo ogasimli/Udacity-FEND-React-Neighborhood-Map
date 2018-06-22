@@ -18,6 +18,16 @@
   align-items: center;
 }
 
+/* InfoWindow */
+.info-label {
+  font-weight: 500;
+}
+
+.api-info {
+  font-size: 0.8em;
+  color: gray;
+}
+
 /* 404 Not Found page */
 
 .error-container {
