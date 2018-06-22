@@ -33,6 +33,7 @@ class MainContainer extends React.Component {
   state = {
     mobileOpen: false,
     places: [],
+    filteredPlaces: [],
     selectedPlaceId: ''
   };
 
@@ -44,7 +45,10 @@ class MainContainer extends React.Component {
    * Fetch all places from API
    */
   getAllPlaces = () =>
-    PlacesAPI.getAll().then(places => this.setState({ places }));
+    PlacesAPI.getAll().then(places => {
+      this.setState({ places });
+      this.setState({ filteredPlaces: places });
+    });
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -69,11 +73,21 @@ class MainContainer extends React.Component {
    *
    * @param {string} query - query string
    */
-  queryUpdate = query => {};
+  queryUpdate = query => {
+    let filteredPlaces;
+    if (!query) {
+      filteredPlaces = this.state.places;
+    } else {
+      filteredPlaces = this.state.places.filter(place =>
+        place.title.toLowerCase().includes(query)
+      );
+    }
+    this.setState({ filteredPlaces });
+  };
 
   render() {
     const { classes } = this.props;
-    const { mobileOpen, places, selectedPlaceId } = this.state;
+    const { mobileOpen, filteredPlaces, selectedPlaceId } = this.state;
 
     return (
       <div className={classes.root}>
@@ -82,11 +96,11 @@ class MainContainer extends React.Component {
           <NavDrawer
             mobileOpen={mobileOpen}
             handleDrawerToggle={this.handleDrawerToggle}
-            places={places}
+            places={filteredPlaces}
             placeClick={this.placeClick}
           />
           <MapContainer
-            places={places}
+            places={filteredPlaces}
             selectedPlaceId={selectedPlaceId}
             queryUpdate={this.queryUpdate}
           />

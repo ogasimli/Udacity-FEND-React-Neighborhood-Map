@@ -27,6 +27,7 @@ const styles = theme => ({
 class PlacesList extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
     places: PropTypes.array.isRequired,
     placeClick: PropTypes.func.isRequired
   };
@@ -173,4 +174,4 @@ class PlacesList extends React.Component {
   }
 }
 
-export default withStyles(styles)(PlacesList);
+export default withStyles(styles, { withTheme: true })(PlacesList);

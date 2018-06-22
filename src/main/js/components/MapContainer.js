@@ -37,12 +37,24 @@ class MapContainer extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    const placeId = nextProps.selectedPlaceId;
-    if (placeId) {
-      const marker = this.state.markers.find(marker => marker.id === placeId);
+    const { places, selectedPlaceId } = nextProps;
+    if (selectedPlaceId !== this.props.selectedPlaceId) {
+      const marker = this.state.markers.find(
+        marker => marker.id === selectedPlaceId
+      );
       if (marker) {
-        this.showInfoWindow(placeId, marker);
+        this.showInfoWindow(selectedPlaceId, marker);
       }
+    }
+    if (places !== this.props.places) {
+      this.state.markers.forEach(marker => {
+        const markerExists = places.find(place => place.id === marker.id);
+        if (markerExists) {
+          marker.setMap(this.state.map);
+        } else {
+          marker.setMap(null);
+        }
+      });
     }
   }
 
