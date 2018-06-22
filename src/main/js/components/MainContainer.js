@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MapContainer from './MapContainer';
+import AppBar from './AppBar';
 import PlacesList from './PlacesList';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -93,21 +93,7 @@ class MainContainer extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              className={classes.navIconHide}
-              onClick={this.handleDrawerToggle}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography id="app-title" variant="title" color="inherit" noWrap>
-              Neighborhood Map
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <AppBar handleDrawerToggle={this.handleDrawerToggle} />
         <main className={classes.content}>
           <Hidden mdUp>
             <Drawer
