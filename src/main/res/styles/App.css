@@ -18,6 +18,39 @@
   align-items: center;
 }
 
+/* Search input styling */
+.search-input {
+  position: absolute;
+  z-index: 100;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s ease-in-out;
+  width: 40%;
+  padding: 15px 10px;
+  font-size: 1em;
+  text-align: center;
+  border: none;
+  margin: auto;
+  top: 2em;
+  left: 0;
+  right: 0;
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  opacity: 1;
+}
+
+.search-input:hover {
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.19), 0 0 10px rgba(0, 0, 0, 0.23);
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .search-input {
+    width: 80%;
+  }
+}
+
 /* InfoWindow */
 .info-label {
   font-weight: 500;

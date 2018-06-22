@@ -64,6 +64,13 @@ class MainContainer extends React.Component {
     this.setState({ selectedPlaceId });
   };
 
+  /**
+   * Filters places array based on the query
+   *
+   * @param {string} query - query string
+   */
+  queryUpdate = query => {};
+
   render() {
     const { classes } = this.props;
     const { mobileOpen, places, selectedPlaceId } = this.state;
@@ -78,9 +85,11 @@ class MainContainer extends React.Component {
             places={places}
             placeClick={this.placeClick}
           />
-          <div className="map-container">
-            <MapContainer places={places} selectedPlaceId={selectedPlaceId} />
-          </div>
+          <MapContainer
+            places={places}
+            selectedPlaceId={selectedPlaceId}
+            queryUpdate={this.queryUpdate}
+          />
         </main>
       </div>
     );

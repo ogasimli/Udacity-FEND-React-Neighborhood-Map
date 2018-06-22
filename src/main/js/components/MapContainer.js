@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import SearchInput from './SearchInput';
 import * as Utils from '../utils/Utils';
 import {
   MAPS_URL,
@@ -20,7 +21,8 @@ class MapContainer extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     places: PropTypes.array.isRequired,
-    selectedPlaceId: PropTypes.string
+    selectedPlaceId: PropTypes.string,
+    queryUpdate: PropTypes.func.isRequired
   };
 
   state = {
@@ -30,7 +32,8 @@ class MapContainer extends Component {
     placeInfo: [],
     showingInfoWindow: false,
     activeMarker: null,
-    selectedPlace: {}
+    selectedPlace: {},
+    searchInputVisible: false
   };
 
   componentWillReceiveProps(nextProps) {
@@ -71,11 +74,18 @@ class MapContainer extends Component {
     });
     // Show markers
     this.setMarkers(map, this.props.places);
+    // Show search field
+    this.showSearchInput();
     // Setup new InfoWindow
     this.setInfoWindow();
     // Save map
     this.setState({ map: map });
   };
+
+  /**
+   * Displays search input field
+   */
+  showSearchInput = () => this.setState({ searchInputVisible: true });
 
   /**
    * Setups and shows markers on the map
@@ -172,10 +182,15 @@ class MapContainer extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, queryUpdate } = this.props;
     return (
-      <div id="map" role="application" tabIndex="-1">
-        <CircularProgress className={classes.progress} size={50} />
+      <div className="map-container">
+        {this.state.searchInputVisible && (
+          <SearchInput queryUpdate={queryUpdate} />
+        )}
+        <div id="map" role="application" tabIndex="-1">
+          <CircularProgress className={classes.progress} size={50} />
+        </div>
       </div>
     );
   }
