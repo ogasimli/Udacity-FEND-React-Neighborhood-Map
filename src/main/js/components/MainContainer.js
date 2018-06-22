@@ -39,7 +39,11 @@ const styles = theme => ({
   },
   content: {
     display: 'flex',
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
+    height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 8px)`,
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`
+    }
   }
 });
 
@@ -121,11 +125,6 @@ class MainContainer extends React.Component {
             <MapContainer
               google={this.props.google}
               places={places}
-              styles={{
-                height: `calc(100vh - ${
-                  theme.mixins.toolbar.minHeight
-                }px - 8px)`
-              }}
             />
           </div>
         </main>
