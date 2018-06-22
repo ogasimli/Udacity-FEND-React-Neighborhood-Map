@@ -9,13 +9,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
 import CastleIcon from './icons/CastleIcon';
 import MuseumIcon from './icons/MuseumIcon';
 import ParkIcon from './icons/ParkIcon';
 import PhilarmoniaIcon from './icons/PhilarmoniaIcon';
 import StadiumIcon from './icons/StadiumIcon';
 import DefaultIcon from './icons/DefaultIcon';
-import { categories } from '../utils/Contsants';
+import SearchResultIcon from './icons/SearchResultIcon';
 import * as Utils from '../utils/Utils';
 
 const styles = theme => ({
@@ -126,48 +127,67 @@ class PlacesList extends React.Component {
   render() {
     const { classes, places, placeClick } = this.props;
 
+    const uniqueCategoryIds = Utils.getUniqueCategoryIds(places);
+
     return (
       <div className={classes.root}>
         <List component="nav">
-          {categories.map(category => (
-            <div key={category.id}>
-              <Divider />
-              <ListItem
-                button
-                className={category.id}
-                onClick={this.handleClick}
-              >
-                <ListItemIcon>{this.getListIcon(category.id)}</ListItemIcon>
-                <ListItemText inset primary={category.title} />
-                {this.getExpansionState(category.id) ? (
-                  <ExpandLess />
-                ) : (
-                  <ExpandMore />
-                )}
-              </ListItem>
-              {Utils.getPlacesByCategory(places, category.id).map(place => (
-                <Collapse
-                  key={place.id}
-                  in={this.getExpansionState(category.id)}
-                  timeout="auto"
-                  unmountOnExit
+          {uniqueCategoryIds && uniqueCategoryIds.length > 0 ? (
+            uniqueCategoryIds.map(categoryId => (
+              <div key={categoryId}>
+                <Divider />
+                <ListItem
+                  button
+                  className={categoryId}
+                  onClick={this.handleClick}
                 >
-                  <List component="div" disablePadding>
-                    <ListItem
-                      button
-                      className={`${classes.nested} ${place.id}`}
-                      onClick={placeClick}
-                    >
-                      <ListItemText
-                        primary={place.title}
-                        secondary={place.address}
-                      />
-                    </ListItem>
-                  </List>
-                </Collapse>
-              ))}
+                  <ListItemIcon>{this.getListIcon(categoryId)}</ListItemIcon>
+                  <ListItemText
+                    inset
+                    primary={Utils.getCategoryName(categoryId)}
+                  />
+                  {this.getExpansionState(categoryId) ? (
+                    <ExpandLess />
+                  ) : (
+                    <ExpandMore />
+                  )}
+                </ListItem>
+                {Utils.getPlacesByCategory(places, categoryId).map(place => (
+                  <Collapse
+                    key={place.id}
+                    in={this.getExpansionState(categoryId)}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <List component="div" disablePadding>
+                      <ListItem
+                        button
+                        className={`${classes.nested} ${place.id}`}
+                        onClick={placeClick}
+                      >
+                        <ListItemText
+                          primary={place.title}
+                          secondary={place.address}
+                        />
+                      </ListItem>
+                    </List>
+                  </Collapse>
+                ))}
+              </div>
+            ))
+          ) : (
+            <div className="no-result-container">
+              <SearchResultIcon />
+              <Typography
+                variant="subheading"
+                gutterBottom
+                align="center"
+                color="textSecondary"
+              >
+                No results found
+              </Typography>
             </div>
-          ))}
+          )}
         </List>
       </div>
     );
