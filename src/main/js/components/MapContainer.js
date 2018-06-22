@@ -33,8 +33,6 @@ class MapContainer extends Component {
     selectedPlace: {}
   };
 
-  componentDidMount() {}
-
   componentWillReceiveProps(nextProps) {
     const placeId = nextProps.selectedPlaceId;
     if (placeId) {
