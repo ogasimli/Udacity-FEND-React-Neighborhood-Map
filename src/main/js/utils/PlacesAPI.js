@@ -1,15 +1,13 @@
 /**
- * Get URL of the paces.json file on your server.
+ * Generates URL of the paces.json file on your server
  *
+ * @param {String} port - port where the localhost runs
  * @returns {String} - URL of the file
  */
-const PLACES_URL = () => {
-  const port = 3000; // Change this to your server port
-  return `http://localhost:${port}/data/places.json`;
-};
+const PLACES_URL = (port = 3000) => `http://localhost:${port}/data/places.json`;
 
 /**
- * Fetch all places from local JSON file
+ * Fetches all places from local JSON file
  *
  * @returns {array} - array of places
  */

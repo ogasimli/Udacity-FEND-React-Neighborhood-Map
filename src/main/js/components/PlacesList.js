@@ -41,6 +41,11 @@ class PlacesList extends React.Component {
     sportsHallOpen: true
   };
 
+  /**
+   * Expands/collapses list groups depending on their current state
+   *
+   * @param {Event} event - click event received by the list group
+   */
   handleClick = event => {
     // Get classList of the event target
     const classList = event.currentTarget.classList;
@@ -57,7 +62,7 @@ class PlacesList extends React.Component {
   /**
    * Returns appropriate icon component based on the category
    *
-   * @param {object} - id of the category object
+   * @param {String} categoryId - id of the category object
    * @returns {JSX} - icon component of the category
    */
   getListIcon = categoryId => {
@@ -80,7 +85,7 @@ class PlacesList extends React.Component {
   /**
    * Returns expansion state of category ListItem
    *
-   * @param {object} - id of the category object
+   * @param {String} categoryId - id of the category object
    * @returns {boolean} - expansion state of category ListItem
    */
   getExpansionState = categoryId => {
@@ -104,8 +109,8 @@ class PlacesList extends React.Component {
    * Returns the key of the appropriate field
    * from state object based on the category id
    *
-   * @param {object} - id of the category object
-   * @returns {boolean} - key of the field
+   * @param {String} categoryId - id of the category object
+   * @returns {String} - key of the field
    */
   getExpansionStateKey = categoryId => {
     switch (categoryId) {

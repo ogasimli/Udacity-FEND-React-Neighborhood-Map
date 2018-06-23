@@ -57,7 +57,7 @@ class MainContainer extends React.Component {
   /**
    * Seve selected place id into current state
    *
-   * @param {event} - Event object received as the result of click
+   * @param {Event} event - Event object received as the result of click
    */
   placeClick = event => {
     // Get classList of the event target
@@ -71,7 +71,7 @@ class MainContainer extends React.Component {
   /**
    * Filters places array based on the query
    *
-   * @param {string} query - query string
+   * @param {String} query - query string
    */
   queryUpdate = query => {
     let filteredPlaces;

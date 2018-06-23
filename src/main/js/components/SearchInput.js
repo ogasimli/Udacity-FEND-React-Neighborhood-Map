@@ -14,7 +14,7 @@ class SearchInput extends Component {
    * Updates component's state and
    * forwards search to filter function
    *
-   * @param {string} query - query string
+   * @param {String} query - query string
    */
   updateQuery = query => {
     this.setState({ query });

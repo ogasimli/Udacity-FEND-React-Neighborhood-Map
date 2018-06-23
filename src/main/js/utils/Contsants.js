@@ -42,8 +42,8 @@ const GOOGLE_API_KEY = 'AIzaSyClMXgQ7Uzz-YA_dcFr8wGaDZ-2E9mQ8wA';
 /**
  * Returns URL for loading Google Maps
  *
- * @param {string} apiKey - Google Maps API key
- * @returns {string} - URL for loading Google Maps
+ * @param {String} apiKey - Google Maps API key
+ * @returns {String} - URL for loading Google Maps
  */
 export const MAPS_URL = (apiKey = GOOGLE_API_KEY) =>
   `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3&callback=initMap`;
@@ -61,6 +61,12 @@ export const MAPS_DEFAULT_CENTER = {
  */
 export const MAPS_DEFAULT_ZOOM = 12;
 
+/**
+ * Custom purple map style
+ *
+ * @author https://snazzymaps.com/explore?text=&sort=&tag=&color=purplen
+ *
+ */
 export const MAPS_CUSTOM_STYLE = [
   {
     featureType: 'all',

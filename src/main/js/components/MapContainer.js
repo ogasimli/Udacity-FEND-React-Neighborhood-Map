@@ -37,21 +37,29 @@ class MapContainer extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    // Get new props
     const { places, selectedPlaceId } = nextProps;
+    // Check if new selectedPlaceId is received
     if (selectedPlaceId !== this.props.selectedPlaceId) {
+      // Find corresponding marker
       const marker = this.state.markers.find(
         marker => marker.id === selectedPlaceId
       );
+      // Show InfoWindow on this marker
       if (marker) {
         this.showInfoWindow(selectedPlaceId, marker);
       }
     }
+    // Check if new places array is received
     if (places !== this.props.places) {
+      // Iterate over existing markers
       this.state.markers.forEach(marker => {
         const markerExists = places.find(place => place.id === marker.id);
+        // Display markers of places that are present in new places array
         if (markerExists) {
           marker.setMap(this.state.map);
         } else {
+          // Hide markers of places that aren't present in new places array
           marker.setMap(null);
         }
       });
@@ -139,8 +147,8 @@ class MapContainer extends Component {
   /**
    * Sets content of the InfoWindow and displays it
    *
-   * @param {String} - id of the place which should be shown
-   * @param {Marker} - marker that received click event
+   * @param {String} placeId - id of the place which should be shown
+   * @param {Marker} marker - marker that received click event
    */
   showInfoWindow = (placeId, marker) => {
     const locationData = {};
@@ -182,7 +190,7 @@ class MapContainer extends Component {
   /**
    * Animates selected marker
    *
-   * @param {Marker} - marker object that should be animated
+   * @param {Marker} marker - marker object that should be animated
    */
   animateMarker = marker => {
     if (marker.getAnimation() !== null) {
