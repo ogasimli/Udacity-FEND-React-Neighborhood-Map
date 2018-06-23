@@ -54,14 +54,14 @@
 /* No search result styling */
 .no-result-container {
   display: flex;
-  height: 100vh;
+  height: 85vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .no_search_result {
-  margin: -5em 0 1em;
+  margin: 0 0 1em;
 }
 
 /* InfoWindow */

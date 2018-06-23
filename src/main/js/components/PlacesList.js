@@ -184,7 +184,7 @@ class PlacesList extends React.Component {
                 align="center"
                 color="textSecondary"
               >
-                No results found
+                Refine your search
               </Typography>
             </div>
           )}
