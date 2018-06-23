@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchInput from './SearchInput';
 import * as Utils from '../utils/Utils';
+import * as PlacesAPI from '../utils/PlacesAPI';
 import {
   MAPS_URL,
   MAPS_DEFAULT_CENTER,
@@ -29,7 +30,7 @@ class MapContainer extends Component {
     map: {},
     markers: [],
     infoWindow: {},
-    placeInfo: [],
+    venueInfos: [],
     showingInfoWindow: false,
     activeMarker: null,
     selectedPlace: {},
@@ -52,6 +53,7 @@ class MapContainer extends Component {
     }
     // Check if new places array is received
     if (places !== this.props.places) {
+      this.fetchVenueInfo(places);
       // Iterate over existing markers
       this.state.markers.forEach(marker => {
         const markerExists = places.find(place => place.id === marker.id);
@@ -100,6 +102,34 @@ class MapContainer extends Component {
     this.setInfoWindow();
     // Save map
     this.setState({ map: map });
+  };
+
+  /**
+   * Fetches venue info and stores it to component state
+   *
+   * @param {array} places - places array that contains all places
+   */
+  fetchVenueInfo = places => {
+    // Get current array of venue information
+    const venueInfos = this.state.venueInfos;
+    places.forEach(place => {
+      // Check if there is already info about the place
+      if (!venueInfos.find(info => info.id === place.id)) {
+        // If not then fetch info from API
+        PlacesAPI.getVenueInfo(place.id).then(info => {
+          if (info) {
+            const venueInfo = {
+              id: place.id,
+              info: info
+            };
+            // Update component state by adding the new venue info
+            this.setState(prevState => ({
+              venueInfos: [...prevState.venueInfos, venueInfo]
+            }));
+          }
+        });
+      }
+    });
   };
 
   /**
@@ -152,17 +182,19 @@ class MapContainer extends Component {
    */
   showInfoWindow = (placeId, marker) => {
     const locationData = {};
-    const placeInfo = this.state.placeInfo[placeId];
-    if (placeInfo !== undefined) {
-      locationData.title = placeInfo.name ? placeInfo.name : marker.title;
-      locationData.phone = placeInfo.contact.formattedPhone
-        ? placeInfo.contact.formattedPhone
+    const venueInfo = this.state.venueInfos.find(info => info.id === placeId);
+    if (venueInfo) {
+      const info = venueInfo.info;
+      locationData.title = info.name ? info.name : marker.title;
+      locationData.phone =
+        info.contact && info.contact.formattedPhone
+          ? info.contact.formattedPhone
+          : 'N/A';
+      locationData.address = info.location.formattedAddress
+        ? info.location.formattedAddress.join(' ')
         : 'N/A';
-      locationData.address = placeInfo.location.formattedAddress
-        ? placeInfo.location.formattedAddress.join(' ')
-        : 'N/A';
-      locationData.website = placeInfo.url
-        ? `<a href=${placeInfo.url} target="_blank">${placeInfo.url}</a>`
+      locationData.website = info.url
+        ? `<a href=${info.url} target="_blank">${info.url}</a>`
         : 'N/A';
     } else {
       const place = this.props.places.find(place => place.id === placeId);
