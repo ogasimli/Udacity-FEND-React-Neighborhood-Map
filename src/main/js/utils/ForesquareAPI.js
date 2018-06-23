@@ -1,25 +1,3 @@
-/**
- * Generates URL of the paces.json file on your server
- *
- * @param {String} port - port where the localhost runs
- * @returns {String} - URL of the file
- */
-const PLACES_URL = () => {
-  let port = 3000; // Debug environment port
-  if (process.env.NODE_ENV === 'production') port = 5000; // Production env port
-  return `http://localhost:${port}/data/places.json`;
-};
-
-/**
- * Fetches all places from local JSON file
- *
- * @returns {Promise} - promise on returning array of places
- */
-export const getAll = () =>
-  fetch(PLACES_URL())
-    .then(res => res.json())
-    .then(data => data.places);
-
 // Client ID of Foresquare API
 const FOURSQUARE_CLIENT_ID = 'BF3AAXY4NUS03G43EONWXNUGP5SPWY1GWDKVZIFC0TLXOJQH';
 // Client Secret of Foresquare API

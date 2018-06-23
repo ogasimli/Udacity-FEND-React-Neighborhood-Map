@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchInput from './SearchInput';
 import * as Utils from '../utils/Utils';
-import * as PlacesAPI from '../utils/PlacesAPI';
+import * as PlacesAPI from '../utils/ForesquareAPI';
 import {
   MAPS_URL,
   MAPS_DEFAULT_CENTER,

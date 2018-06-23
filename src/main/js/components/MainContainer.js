@@ -4,7 +4,7 @@ import MapContainer from './MapContainer';
 import AppBar from './AppBar';
 import NavDrawer from './NavDrawer';
 import { withStyles } from '@material-ui/core/styles';
-import * as PlacesAPI from '../utils/PlacesAPI';
+import { mockPlaces } from '../utils/Contsants';
 
 const styles = theme => ({
   root: {
@@ -38,17 +38,16 @@ class MainContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.getAllPlaces();
+    this.storeAllPlaces(mockPlaces);
   }
 
   /**
    * Fetch all places from API
    */
-  getAllPlaces = () =>
-    PlacesAPI.getAll().then(places => {
-      this.setState({ places });
-      this.setState({ filteredPlaces: places });
-    });
+  storeAllPlaces = places => {
+    this.setState({ places });
+    this.setState({ filteredPlaces: places });
+  };
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
