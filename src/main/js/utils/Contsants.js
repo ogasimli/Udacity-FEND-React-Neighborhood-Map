@@ -6,31 +6,31 @@ export const categories = [
     id: 'historic_monument',
     title: 'Monuments',
     markerIcon:
-      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/historic_pinlet-2-medium.png&highlight=ff000000,ffffff,4CAF50,ffffff&color=ff000000?scale=1.5'
+      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/historic_pinlet-2-medium.png&highlight=ff000000,ffffff,ffffff,9026b5&color=ff000000?scale=1.5'
   },
   {
     id: 'park',
     title: 'Parks',
     markerIcon:
-      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/cemetery_pinlet-2-medium.png&highlight=ff000000,ffffff,4CAF50,ffffff&color=ff000000?scale=1.5'
+      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/cemetery_pinlet-2-medium.png&highlight=ff000000,ffffff,ffffff,9026b5&color=ff000000?scale=1.5'
   },
   {
     id: 'museum',
     title: 'Museums',
     markerIcon:
-      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/museum_pinlet-2-medium.png&highlight=ff000000,ffffff,4CAF50,ffffff&color=ff000000?scale=1.5'
+      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/museum_pinlet-2-medium.png&highlight=ff000000,ffffff,ffffff,9026b5&color=ff000000?scale=1.5'
   },
   {
     id: 'music_hall',
     title: 'Music Halls',
     markerIcon:
-      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/note_pinlet-2-medium.png&highlight=ff000000,ffffff,4CAF50,ffffff&color=ff000000?scale=1.5'
+      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/note_pinlet-2-medium.png&highlight=ff000000,ffffff,ffffff,9026b5&color=ff000000?scale=1.5'
   },
   {
     id: 'sports_hall',
     title: 'Sports Halls',
     markerIcon:
-      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/stadium_pinlet-2-medium.png&highlight=ff000000,ffffff,4CAF50,ffffff&color=ff000000?scale=1.5'
+      'https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_shadow-2-medium.png,assets/icons/poi/tactile/pinlet_outline_v2-2-medium.png,assets/icons/poi/tactile/pinlet-2-medium.png,assets/icons/poi/quantum/pinlet/stadium_pinlet-2-medium.png&highlight=ff000000,ffffff,ffffff,9026b5&color=ff000000?scale=1.5'
   }
 ];
 
@@ -63,9 +63,99 @@ export const MAPS_DEFAULT_ZOOM = 12;
 
 export const MAPS_CUSTOM_STYLE = [
   {
-    featureType: 'administrative.land_parcel',
+    featureType: 'all',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'simplified'
+      },
+      {
+        hue: '#bc00ff'
+      },
+      {
+        saturation: '0'
+      }
+    ]
+  },
+  {
+    featureType: 'administrative',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'simplified'
+      }
+    ]
+  },
+  {
+    featureType: 'administrative',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#e8b8f9'
+      }
+    ]
+  },
+  {
+    featureType: 'administrative.country',
     elementType: 'labels',
     stylers: [
+      {
+        color: '#ff0000'
+      }
+    ]
+  },
+  {
+    featureType: 'administrative.land_parcel',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        visibility: 'simplified'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape',
+    elementType: 'all',
+    stylers: [
+      {
+        color: '#3e114e'
+      },
+      {
+        visibility: 'simplified'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'off'
+      },
+      {
+        color: '#a02aca'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape.natural',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'simplified'
+      },
+      {
+        color: '#2e093b'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape.natural',
+    elementType: 'labels.text',
+    stylers: [
+      {
+        color: '#9e1010'
+      },
       {
         visibility: 'off'
       }
@@ -73,37 +163,61 @@ export const MAPS_CUSTOM_STYLE = [
   },
   {
     featureType: 'landscape.natural',
-    elementType: 'geometry.fill',
+    elementType: 'labels.text.fill',
     stylers: [
       {
-        color: '#e0efef'
+        color: '#ff0000'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape.natural.landcover',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'simplified'
       },
       {
-        visibility: 'on'
+        color: '#58176e'
+      }
+    ]
+  },
+  {
+    featureType: 'landscape.natural.landcover',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        visibility: 'simplified'
       }
     ]
   },
   {
     featureType: 'poi',
-    elementType: 'geometry.fill',
-    stylers: [
-      {
-        color: '#c0e8e8'
-      },
-      {
-        hue: '#1900ff'
-      },
-      {
-        visibility: 'on'
-      }
-    ]
-  },
-  {
-    featureType: 'poi',
-    elementType: 'labels.text',
+    elementType: 'all',
     stylers: [
       {
         visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'poi.business',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'road',
+    elementType: 'all',
+    stylers: [
+      {
+        saturation: -100
+      },
+      {
+        lightness: 45
       }
     ]
   },
@@ -112,10 +226,10 @@ export const MAPS_CUSTOM_STYLE = [
     elementType: 'geometry',
     stylers: [
       {
-        lightness: 100
+        visibility: 'simplified'
       },
       {
-        visibility: 'simplified'
+        color: '#a02aca'
       }
     ]
   },
@@ -124,16 +238,46 @@ export const MAPS_CUSTOM_STYLE = [
     elementType: 'labels',
     stylers: [
       {
-        visibility: 'off'
+        visibility: 'simplified'
       }
     ]
   },
   {
-    featureType: 'road.arterial',
-    elementType: 'labels',
+    featureType: 'road',
+    elementType: 'labels.text.fill',
     stylers: [
       {
-        visibility: 'off'
+        color: '#d180ee'
+      }
+    ]
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        visibility: 'simplified'
+      }
+    ]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'simplified'
+      }
+    ]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [
+      {
+        visibility: 'simplified'
+      },
+      {
+        color: '#a02aca'
       }
     ]
   },
@@ -143,32 +287,90 @@ export const MAPS_CUSTOM_STYLE = [
     stylers: [
       {
         visibility: 'off'
+      },
+      {
+        color: '#ff0000'
       }
     ]
   },
   {
-    featureType: 'road.local',
+    featureType: 'road.highway',
+    elementType: 'labels.text',
     stylers: [
       {
-        visibility: 'off'
+        color: '#a02aca'
+      },
+      {
+        visibility: 'simplified'
       }
     ]
   },
   {
-    featureType: 'road.local',
-    elementType: 'labels',
+    featureType: 'road.highway',
+    elementType: 'labels.text.fill',
     stylers: [
       {
-        visibility: 'off'
+        color: '#cc81e7'
+      },
+      {
+        visibility: 'simplified'
       }
     ]
   },
   {
-    featureType: 'transit.line',
+    featureType: 'road.highway',
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        visibility: 'simplified'
+      },
+      {
+        hue: '#bc00ff'
+      }
+    ]
+  },
+  {
+    featureType: 'road.arterial',
     elementType: 'geometry',
     stylers: [
       {
-        lightness: 700
+        color: '#6d2388'
+      }
+    ]
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        color: '#c46ce3'
+      }
+    ]
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'labels.icon',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'transit',
+    elementType: 'all',
+    stylers: [
+      {
+        visibility: 'off'
+      }
+    ]
+  },
+  {
+    featureType: 'water',
+    elementType: 'all',
+    stylers: [
+      {
+        color: '#b7918f'
       },
       {
         visibility: 'on'
@@ -177,9 +379,22 @@ export const MAPS_CUSTOM_STYLE = [
   },
   {
     featureType: 'water',
+    elementType: 'geometry',
     stylers: [
       {
-        color: '#7dcdcd'
+        color: '#280b33'
+      }
+    ]
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels',
+    stylers: [
+      {
+        visibility: 'simplified'
+      },
+      {
+        color: '#a02aca'
       }
     ]
   }
