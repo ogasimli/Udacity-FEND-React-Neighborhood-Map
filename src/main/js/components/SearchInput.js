@@ -26,6 +26,7 @@ class SearchInput extends Component {
       <input
         type="search"
         name="query"
+        aria-label="Search input"
         value={this.state.query}
         className="search-input"
         placeholder="Search places"
