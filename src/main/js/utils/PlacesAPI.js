@@ -4,7 +4,11 @@
  * @param {String} port - port where the localhost runs
  * @returns {String} - URL of the file
  */
-const PLACES_URL = (port = 3000) => `http://localhost:${port}/data/places.json`;
+const PLACES_URL = () => {
+  let port = 3000; // Debug environment port
+  if (process.env.NODE_ENV === 'production') port = 5000; // Production env port
+  return `http://localhost:${port}/data/places.json`;
+};
 
 /**
  * Fetches all places from local JSON file
