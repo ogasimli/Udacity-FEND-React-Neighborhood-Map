@@ -60,6 +60,7 @@ class MainContainer extends React.Component {
    * @param {Event} event - Event object received as the result of click
    */
   placeClick = event => {
+    this.handleDrawerToggle();
     // Get classList of the event target
     const classList = event.currentTarget.classList;
     // Get last class of the target
