@@ -216,12 +216,15 @@ class MapContainer extends Component {
       locationData.website = info.url
         ? `<a href=${info.url} target="_blank">${info.url}</a>`
         : 'N/A';
+      locationData.apiInfo = 'Venue data provided by FourSquare API';
     } else {
       const place = this.props.places.find(place => place.id === placeId);
       locationData.title = place.title ? place.title : marker.title;
       locationData.phone = 'N/A';
       locationData.address = place.address ? place.address : 'N/A';
       locationData.website = 'N/A';
+      locationData.apiError =
+        'Error occured while fetching place info from FourSquare API';
     }
     const contentString = `<div tabindex="0">
     <h3 role="heading">${locationData.title}</h3>
@@ -231,7 +234,10 @@ class MapContainer extends Component {
     <p><a href="https://foursquare.com/v/${
       marker.id
     }/" target="_blank">More Info on FourSquare</a></p>
-    <p class="api-info">Venue data provided by FourSquare API</p>
+    <p class="api-error">${
+      locationData.apiError ? locationData.apiError : ''
+    }</p>
+    <p class="api-info">${locationData.apiInfo ? locationData.apiInfo : ''}</p>
     </div>`;
     const infoWindow = this.state.infoWindow;
     infoWindow.setContent(contentString);

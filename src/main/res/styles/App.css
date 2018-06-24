@@ -114,6 +114,11 @@
   font-weight: 500;
 }
 
+.api-error {
+  font-size: 0.8em;
+  color: red;
+}
+
 .api-info {
   font-size: 0.8em;
   color: gray;
