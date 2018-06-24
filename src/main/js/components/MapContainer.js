@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchInput from './SearchInput';
+import MapError from './MapError';
 import * as Utils from '../utils/Utils';
 import * as PlacesAPI from '../utils/ForesquareAPI';
 import {
@@ -34,7 +35,9 @@ class MapContainer extends Component {
     showingInfoWindow: false,
     activeMarker: null,
     selectedPlace: {},
-    searchInputVisible: false
+    searchInputVisible: false,
+    authError: false,
+    mapErrorVisible: false
   };
 
   componentWillReceiveProps(nextProps) {
@@ -68,40 +71,57 @@ class MapContainer extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    // Set global initMap function
+    window.initMap = this.initMap;
+    // Set global gm_authFailure function
+    window.gm_authFailure = this.loadError;
     // Get body tag
     const bodyTag = document.querySelector('body');
     // Build Google Maps script tag
     const mapsTag = document.createElement('script');
     mapsTag.src = MAPS_URL();
+    mapsTag.onerror = this.loadError;
     mapsTag.async = true;
     mapsTag.defer = true;
     // Append Google Maps script tag to the end of the page body
     bodyTag.appendChild(mapsTag);
   }
 
-  componentDidMount() {
-    window.initMap = this.initMap;
-  }
-
   /**
    * Initialize map
    */
   initMap = () => {
-    const map = new window.google.maps.Map(document.querySelector('#map'), {
-      center: MAPS_DEFAULT_CENTER,
-      zoom: MAPS_DEFAULT_ZOOM,
-      styles: MAPS_CUSTOM_STYLE,
-      mapTypeControl: false
-    });
-    // Show markers
-    this.setMarkers(map, this.props.places);
-    // Show search field
-    this.showSearchInput();
-    // Setup new InfoWindow
-    this.setInfoWindow();
-    // Save map
-    this.setState({ map: map });
+    const mapTag = document.querySelector('#map');
+    if (mapTag) {
+      const map = new window.google.maps.Map(mapTag, {
+        center: MAPS_DEFAULT_CENTER,
+        zoom: MAPS_DEFAULT_ZOOM,
+        styles: MAPS_CUSTOM_STYLE,
+        mapTypeControl: false
+      });
+      // Show markers
+      this.setMarkers(map, this.props.places);
+      // Show search field
+      this.showSearchInput();
+      // Setup new InfoWindow
+      this.setInfoWindow();
+      // Save map
+      this.setState({ map: map });
+    }
+  };
+
+  /**
+   * Displays MapError component when error occurs
+   * while loading the Google Maps
+   *
+   * @param {Object} error - error object occured while loading
+   */
+  loadError = error => {
+    // Store map error
+    if (error) this.setState({ authError: true });
+    // Store visibility status of map error
+    this.setState({ mapErrorVisible: true });
   };
 
   /**
@@ -235,7 +255,9 @@ class MapContainer extends Component {
 
   render() {
     const { classes, queryUpdate } = this.props;
-    return (
+    return this.state.mapErrorVisible ? (
+      <MapError authError={this.state.authError} />
+    ) : (
       <div className="map-container">
         {this.state.searchInputVisible && (
           <SearchInput queryUpdate={queryUpdate} />

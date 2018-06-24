@@ -18,6 +18,51 @@
   align-items: center;
 }
 
+/* Map Error */
+.map-error-container {
+  height: 100%;
+  width: 100%;
+  display: table;
+  background-color: #e0e0e0;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.map-error-content {
+  border-radius: 1px;
+  padding-top: 0;
+  padding-left: 10%;
+  padding-right: 10%;
+  position: static;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.map-error-icon {
+  text-align: center;
+}
+
+.map-error-icon img {
+  user-select: none;
+}
+
+.map-error-title {
+  margin: 5px 5px 20px;
+  color: #616161;
+  font-family: Roboto, Arial, sans-serif;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.map-error-message {
+  margin: 5px;
+  color: #757575;
+  font-family: Roboto, Arial, sans-serif;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
 /* Search input styling */
 .search-input {
   position: absolute;
